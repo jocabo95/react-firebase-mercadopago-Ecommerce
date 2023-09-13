@@ -4,10 +4,10 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
 
 const Home = () => {
-  // create variable that stores products
+  // create variable that stores firebase documents
   const [products, setProducts] = useState([]);
 
-  // bring products from firebase and store them in products
+  // bring collection from firebase and store docs in products
   useEffect(() => {
     let refCollection = collection(db, "productos");
     getDocs(refCollection)
@@ -40,10 +40,13 @@ const Home = () => {
               width: "80%",
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start"
+              alignItems: "flex-start",
             }}
           >
-            <img style={{ width: "100%", maxWidth: "300px" }} src={product.img} />
+            <img
+              style={{ width: "100%", maxWidth: "300px" }}
+              src={product.img}
+            />
             <h2>{product.title}</h2>
             <h4>{product.unit_price}</h4>
             <h4>{product.category}</h4>
