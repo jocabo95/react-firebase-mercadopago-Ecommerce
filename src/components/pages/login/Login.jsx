@@ -38,8 +38,9 @@ const Login = () => {
 
     try{
       const res = await onSignIn(userCredentials);
-      console.log(res)
-      navigate("/")
+      if(res.user){
+        navigate("/")
+      }
     }catch(error){
       console.log(error)
     }

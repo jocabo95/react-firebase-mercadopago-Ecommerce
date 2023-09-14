@@ -7,7 +7,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
-
+  sendPasswordResetEmail
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -66,4 +66,10 @@ export const register = async({email, password})=>{
     } catch (error) {
         console.log(error)
     }
+}
+
+//forgot password
+export const forgotPassword =async(email)=>{
+    let res = sendPasswordResetEmail(auth, email)
+    return res
 }
