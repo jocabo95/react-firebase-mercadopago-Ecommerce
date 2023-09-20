@@ -1,6 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { db } from "../../../firebaseConfig";
+import { Link } from "react-router-dom";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ const ItemListContainer = () => {
 
         setProducts(productsArr);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("firebase error dat", err));
   }, []);
 
   return (
@@ -31,24 +32,25 @@ const ItemListContainer = () => {
     >
       {products.map((product) => {
         return (
-          <div
-            key={product.id}
-            style={{
-              border: "solid thin",
-              width: "80%",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
-            <img
-              style={{ width: "100%", maxWidth: "300px" }}
-              src={product.img}
-            />
-            <h2>{product.title}</h2>
-            <h4>{product.unit_price}</h4>
-            <h4>{product.category}</h4>
-          </div>
+          <Link key={product.id} to={`/itemDetail/${product.id}`}>
+            <div
+              style={{
+                border: "solid thin",
+                width: "80%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <img
+                style={{ width: "100%", maxWidth: "300px" }}
+                src={product.img}
+              />
+              <h2>{product.title}</h2>
+              <h4>{product.unit_price}</h4>
+              <h4>{product.category}</h4>
+            </div>
+          </Link>
         );
       })}
     </div>
